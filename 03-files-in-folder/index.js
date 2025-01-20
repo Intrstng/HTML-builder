@@ -25,15 +25,16 @@ const getFilesInfoInDirectory = async (folderPath) => {
         );
       }
     });
-
     await Promise.all(filePromises);
-    stdout.write('File processing completed successfully.\n');
   } catch (error) {
     stderr.write(`Error reading directory: ${error}\n`);
   }
 };
 
 getFilesInfoInDirectory(folderPath)
+  .then(message => {
+    stdout.write('File processing completed successfully.\n');
+  })
   .catch(error => {
     stderr.write(`Failed to process files: ${error.message}\n`);
   });
