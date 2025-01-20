@@ -8,20 +8,21 @@ const getFilesInfoInDirectory = async (folderPath) => {
   try {
     const filePromises = [];
     const dirents = await fs.readdir(folderPath, { withFileTypes: true });
-    dirents.forEach(dirent => {
+    dirents.forEach((dirent) => {
       if (dirent.isFile()) {
         const filePath = path.join(folderPath, dirent.name);
         filePromises.push(
-          fs.stat(filePath)
-            .then(stats => {
+          fs
+            .stat(filePath)
+            .then((stats) => {
               const fileName = path.parse(dirent.name).name;
               const fileExtension = path.parse(dirent.name).ext.slice(1);
               const fileSize = (stats.size / 1024).toFixed(3);
               stdout.write(`${fileName} - ${fileExtension} - ${fileSize}kb\n`);
             })
-            .catch(error => {
+            .catch((error) => {
               stderr.write(`Error getting file stats: ${error}\n`);
-            })
+            }),
         );
       }
     });
@@ -32,9 +33,9 @@ const getFilesInfoInDirectory = async (folderPath) => {
 };
 
 getFilesInfoInDirectory(folderPath)
-  .then(message => {
+  .then(() => {
     stdout.write('File processing completed successfully.\n');
   })
-  .catch(error => {
+  .catch((error) => {
     stderr.write(`Failed to process files: ${error.message}\n`);
   });

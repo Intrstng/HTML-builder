@@ -19,10 +19,14 @@ const createStylesBundle = async (source, targetFolder, targetFile) => {
         stylesArray.push(fileContent);
       }
     }
-    await fs.writeFile(targetFile, stylesArray.join('\n'), { encoding: 'utf-8' });
+    await fs.writeFile(targetFile, stylesArray.join('\n'), {
+      encoding: 'utf-8',
+    });
     stdout.write(`Styles bundle file successfully created: ${targetFile}\n`);
   } catch (error) {
-    stderr.write(`Error during the styles bundle creation occurred: ${error.message}\n`);
+    stderr.write(
+      `Error during the styles bundle creation occurred: ${error.message}\n`,
+    );
   }
 };
 

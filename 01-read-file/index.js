@@ -9,7 +9,9 @@ const read = () => {
   const readStream = createReadStream(pathToFile, { encoding: 'utf-8' });
   readStream.pipe(stdout);
   readStream.on('error', (error) => {
-    throw new Error(`File ${sourceFileName} read operation failed. Error: ${error}`);
+    throw new Error(
+      `File ${sourceFileName} read operation failed. Error: ${error}`,
+    );
   });
 };
 

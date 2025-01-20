@@ -41,7 +41,7 @@ const removeFolder = async (pathToFolder) => {
   } catch (error) {
     stderr.write(`Error removing folder: ${error.message}\n`);
   }
-}
+};
 
 const startСopy = async (sourceDirectoryPath, targetDirectoryPath) => {
   try {
