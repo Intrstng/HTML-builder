@@ -30,7 +30,7 @@ const copyDirectory = async (source, target) => {
         }
       }
     } else {
-      stderr.write(`Error copying directory: ${error.message}`);
+      stderr.write(`Error copying directory: ${error.message}\n`);
     }
   }
 };
@@ -39,7 +39,7 @@ const removeFolder = async (pathToFolder) => {
   try {
     await fs.rm(pathToFolder, { recursive: true, force: true });
   } catch (error) {
-    stderr.write(`Error removing folder: ${error.message}`);
+    stderr.write(`Error removing folder: ${error.message}\n`);
   }
 }
 
@@ -47,10 +47,14 @@ const startСopy = async (sourceDirectoryPath, targetDirectoryPath) => {
   try {
     await removeFolder(targetDirectoryPath);
     await copyDirectory(sourceDirectoryPath, targetDirectoryPath);
-    stdout.write('Files copied successfully.');
+    stdout.write(`Files copied successfully: ${targetDirectoryPath}\n`);
   } catch (error) {
-    stderr.write(`Failed to copy files: ${error.message}`);
+    stderr.write(`Failed to copy files: ${error.message}\n`);
   }
 };
 
-startСopy(sourceFolderPath, destinationFolderPath);
+if (require.main === module) {
+  startСopy(sourceFolderPath, destinationFolderPath);
+}
+
+module.exports = startСopy;

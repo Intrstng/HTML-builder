@@ -20,10 +20,14 @@ const createStylesBundle = async (source, targetFolder, targetFile) => {
       }
     }
     await fs.writeFile(targetFile, stylesArray.join('\n'), { encoding: 'utf-8' });
-    stdout.write(`Styles bundle file successfully created: ${targetFile}`);
+    stdout.write(`Styles bundle file successfully created: ${targetFile}\n`);
   } catch (error) {
-    stderr.write(`Error during the styles bundle creation: ${error.message}`);
+    stderr.write(`Error during the styles bundle creation occurred: ${error.message}\n`);
   }
 };
 
-createStylesBundle(sourceFolderPath, outputFolderPath, bundleFilePath);
+if (require.main === module) {
+  createStylesBundle(sourceFolderPath, outputFolderPath, bundleFilePath);
+}
+
+module.exports = createStylesBundle;
